@@ -27,3 +27,13 @@ def populate_db(test_movies):
 @pytest.mark.asyncio
 async def test_get_all_movies(populate_db, test_movies):
     assert await movies.get_all_movies() == test_movies
+
+
+@pytest.mark.asyncio
+async def test_get_movie_by_name_exists(populate_db, test_movie_1):
+    assert await movies.get_movie_by_name(test_movie_1.name) == test_movie_1
+
+
+@pytest.mark.asyncio
+async def test_get_movie_by_name_not_exists(populate_db):
+    assert await movies.get_movie_by_name('random') is None
