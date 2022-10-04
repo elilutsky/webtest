@@ -19,21 +19,21 @@ def test_movies(test_movie_1, test_movie_2) -> list[Movie]:
     return [test_movie_1, test_movie_2]
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def populate_db(test_movies):
     movies.movies = test_movies
 
 
 @pytest.mark.asyncio
-async def test_get_all_movies(populate_db, test_movies):
+async def test_get_all_movies(test_movies):
     assert await movies.get_all_movies() == test_movies
 
 
 @pytest.mark.asyncio
-async def test_get_movie_by_name_exists(populate_db, test_movie_1):
+async def test_get_movie_by_name_exists(test_movie_1):
     assert await movies.get_movie_by_name(test_movie_1.name) == test_movie_1
 
 
 @pytest.mark.asyncio
-async def test_get_movie_by_name_not_exists(populate_db):
+async def test_get_movie_by_name_not_exists():
     assert await movies.get_movie_by_name('random') is None
