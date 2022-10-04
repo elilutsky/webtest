@@ -18,4 +18,7 @@ async def get_all_movies() -> list[Movie]:
 
 
 async def get_movie_by_name(name: str) -> Movie | None:
-    return next(filter(lambda movie: movie.name == name, await get_all_movies()), None)
+    try:
+        return next(filter(lambda movie: movie.name == name, await get_all_movies()))
+    except StopIteration:
+        return None
