@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "moviecenter"
+version = "0.1.0"
+description = ""
+authors = ["Eli"]
+
+[tool.poetry.dependencies]
+python = "3.10"
+pydantic = "1.10.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
