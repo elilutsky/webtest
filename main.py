@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 
 from movies import Movie, get_all_movies, get_movie_by_name
 
+
 app = FastAPI()
 
 
