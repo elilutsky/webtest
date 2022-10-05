@@ -1,0 +1,36 @@
+# GHA workflow for running tests
+
+name: Run Format, Lint and Test
+
+on:
+  push:
+
+jobs:
+  CI:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    steps:
+      - name: Checkout SCM
+        uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'poetry'
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Run format
+        run: |
+          make format
+      - name: Run lint
+        run: |
+          make lint
+      - name: Run test
+        run: |
+          make test
+          
