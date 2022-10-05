@@ -19,3 +19,7 @@ async def get_all_movies() -> list[Movie]:
 
 async def get_movie_by_name(name: str) -> Movie | None:
     return next((m for m in await get_all_movies() if m.name == name), None)
+
+
+async def add_movie(movie: Movie) -> None:
+    movies.append(movie)
