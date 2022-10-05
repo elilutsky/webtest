@@ -1,4 +1,8 @@
+.DEFAULT_GOAL := default
+
 .PHONY: format lint test run
+
+default:
 
 format:
 	isort .
