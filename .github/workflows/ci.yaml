@@ -1,13 +1,13 @@
 # GHA workflow for running tests
 
-name: run tests
+name: Run Format, Lint and Test
 
 on:
   push:
   pull_request:
 
 jobs:
-  build:
+  CI:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -17,12 +17,21 @@ jobs:
         uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry
-      - name: Install Python
+      - name: Install python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'poetry'
-      - name: run test
+      - name: Install dev dependencies
+        run: |
+          poetry install --only dev
+      - name: Run format
+        run: |
+          make format
+      - name: Run lint
+        run: |
+          make lint
+      - name: Run test
         run: |
           make test
           

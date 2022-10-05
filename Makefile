@@ -5,12 +5,12 @@
 default:
 
 format:
-	isort .
-	black .
+	poetry run isort .
+	poetry run black .
 
 lint:
-	mypy .
-	flake8 .
+	poetry run mypy .
+	poetry run flake8 .
 
 test:
 	poetry install
