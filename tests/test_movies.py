@@ -49,3 +49,10 @@ async def test_add_movie(test_movie_new: Movie) -> None:
     await movies.add_movie(test_movie_new)
 
     assert await movies.get_movie_by_name(test_movie_new.name) == test_movie_new
+
+
+@pytest.mark.asyncio
+async def test_delete_movie(test_movie_1: Movie) -> None:
+    await movies.delete_movie(test_movie_1)
+
+    assert await movies.get_movie_by_name(test_movie_1.name) is None

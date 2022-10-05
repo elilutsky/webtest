@@ -23,3 +23,7 @@ async def get_movie_by_name(name: str) -> Movie | None:
 
 async def add_movie(movie: Movie) -> None:
     movies.append(movie)
+
+
+async def delete_movie(movie: Movie) -> None:
+    movies.remove(movie)

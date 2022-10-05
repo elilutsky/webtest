@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
-from .movies import Movie, add_movie, get_all_movies, get_movie_by_name
+from .movies import Movie, add_movie, get_all_movies, get_movie_by_name, delete_movie
 
 app = FastAPI()
 
@@ -22,3 +22,8 @@ async def get_movie_by_name_api(name: str) -> Movie:
 @app.post("/movies/")
 async def add_movie_api(movie: Movie) -> None:
     await add_movie(movie)
+
+
+@app.delete("/movies/{name}")
+async def delete_movie_api(movie: Movie) -> None:
+    await delete_movie(movie)
