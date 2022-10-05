@@ -19,7 +19,7 @@ async def get_movie_by_name_api(name: str) -> Movie:
         return movie
 
 
-@app.post("/movies/")
+@app.post("/movies")
 async def add_movie_api(movie: Movie) -> None:
     await add_movie(movie)
 
