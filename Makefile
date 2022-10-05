@@ -13,7 +13,8 @@ lint:
 	flake8 .
 
 test:
-	tox -q
+	poetry install
+	poetry run pytest -vv
 
 run:
 	uvicorn moviecenter.main:app --reload
