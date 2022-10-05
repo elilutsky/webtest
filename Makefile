@@ -14,7 +14,6 @@ lint:
 	$(PYTHON_EXEC) flake8 .
 
 test:
-	poetry install
 	$(PYTHON_EXEC) pytest -vv
 
 run:
