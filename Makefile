@@ -1,20 +1,21 @@
 .DEFAULT_GOAL := default
+PYTHON_EXEC := poetry run
 
 .PHONY: format lint test run
 
 default:
 
 format:
-	poetry run isort .
-	poetry run black .
+	$(PYTHON_EXEC) isort .
+	$(PYTHON_EXEC) black .
 
 lint:
-	poetry run mypy .
-	poetry run flake8 .
+	$(PYTHON_EXEC) mypy .
+	$(PYTHON_EXEC) flake8 .
 
 test:
 	poetry install
-	poetry run pytest -vv
+	$(PYTHON_EXEC) pytest -vv
 
 run:
 	uvicorn moviecenter.main:app --reload
