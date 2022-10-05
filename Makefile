@@ -1,4 +1,8 @@
-.PHONY: lint test run
+.PHONY: format lint test run
+
+format:
+	isort .
+	black .
 
 lint:
 	mypy .

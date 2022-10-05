@@ -6,12 +6,12 @@ from moviecenter.movies import Movie
 
 @pytest.fixture
 def test_movie_1() -> Movie:
-    return Movie(name='LoTR', director='Steve', budget=100000000)
+    return Movie(name="LoTR", director="Steve", budget=100000000)
 
 
 @pytest.fixture
 def test_movie_2() -> Movie:
-    return Movie(name='Batman v Superman', director='Zack', budget=100000000)
+    return Movie(name="Batman v Superman", director="Zack", budget=100000000)
 
 
 @pytest.fixture
@@ -36,4 +36,4 @@ async def test_get_movie_by_name_exists(test_movie_1):
 
 @pytest.mark.asyncio
 async def test_get_movie_by_name_not_exists():
-    assert await movies.get_movie_by_name('random') is None
+    assert await movies.get_movie_by_name("random") is None
