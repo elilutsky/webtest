@@ -10,6 +10,7 @@ format:
 
 lint:
 	mypy .
+	flake8 .
 
 test:
 	tox -q
