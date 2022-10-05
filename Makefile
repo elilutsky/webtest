@@ -16,5 +16,7 @@ lint:
 test:
 	$(PYTHON_EXEC) pytest -vv
 
+check: format lint test
+
 run:
 	uvicorn moviecenter.main:app --reload
