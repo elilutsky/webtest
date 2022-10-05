@@ -4,7 +4,6 @@ name: Run Format, Lint and Test
 
 on:
   push:
-  pull_request:
 
 jobs:
   CI:
