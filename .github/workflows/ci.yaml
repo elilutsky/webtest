@@ -11,18 +11,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python-version: ["3.10"]
+        os: [ ubuntu-latest, macos-latest ]
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout SCM
+        uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry
-      - uses: actions/setup-python@v4
+      - name: Install Python
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.10'
           cache: 'poetry'
       - name: run test
         run: |
-          poetry install
-          poetry run pytest
+          make test
           
