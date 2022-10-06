@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN pip install poetry==1.2.1 && poetry config virtualenvs.in-project true
 
-ADD pyproject.toml poetry.lock /app/
+COPY pyproject.toml poetry.lock /app/
 RUN poetry install --no-root --without=dev --no-ansi
 RUN poetry install --only-root --no-ansi
 

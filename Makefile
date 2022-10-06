@@ -21,8 +21,7 @@ test:
 check: format lint test
 
 build:
-	docker build -t $(IMAGE):$(VERSION) .
-	docker tag $(IMAGE):$(VERSION) $(IMAGE):latest
+	docker build -t $(IMAGE):$(VERSION) -t $(IMAGE):latest .
 
 run:
 	docker run -d -p 8000:8000/tcp $(IMAGE):latest
