@@ -1,0 +1,9 @@
+__pycache__
+.git
+.mypy_cache
+.pytest_cache
+tests
+.github
+.isort.cfg
+mypy.ini
+
