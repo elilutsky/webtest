@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := default
 PYTHON_EXEC := poetry run
+IMAGE := moviecenter
+VERSION := 0.1.0
 
 .PHONY: format lint test run
 
@@ -16,5 +18,10 @@ lint:
 test:
 	$(PYTHON_EXEC) pytest -vv
 
+check: format lint test
+
+build:
+	docker build -t $(IMAGE):$(VERSION) -t $(IMAGE):latest .
+
 run:
-	uvicorn moviecenter.main:app --reload
+	docker run -d -p 8000:8000/tcp $(IMAGE):latest
