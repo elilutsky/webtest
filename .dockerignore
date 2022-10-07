@@ -7,6 +7,4 @@ tests
 .isort.cfg
 mypy.ini
 .flake8
-poetry.lock
-pyproject.toml
 .idea

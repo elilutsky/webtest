@@ -1,20 +1,18 @@
 FROM python:3.10-slim AS builder
 
-WORKDIR /app
-
 RUN pip install poetry==1.2.1 && poetry config virtualenvs.in-project true
 
-COPY pyproject.toml poetry.lock /app/
-RUN poetry install --no-root --without=dev --no-ansi
-RUN poetry install --only-root --no-ansi
+COPY pyproject.toml poetry.lock ./
+RUN poetry export -o requirements.txt
 
 FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY --from=builder /app /app
-ADD . /app
+COPY --from=builder requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . /app
 
 EXPOSE 8000
 
-CMD .venv/bin/python -m uvicorn moviecenter.main:app --host 0.0.0.0 --port 8000
+CMD uvicorn moviecenter.main:app --host 0.0.0.0 --port 8000
