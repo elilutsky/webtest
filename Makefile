@@ -24,4 +24,4 @@ build:
 	docker build -t $(IMAGE):$(VERSION) -t $(IMAGE):latest .
 
 run:
-	docker run -d -p 8000:8000/tcp $(IMAGE):latest
+	docker-compose up -d
