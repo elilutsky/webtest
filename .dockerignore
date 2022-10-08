@@ -8,3 +8,4 @@ tests
 mypy.ini
 .flake8
 .idea
+pytestdebug.log
