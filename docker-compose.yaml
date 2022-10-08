@@ -5,3 +5,9 @@ services:
     image: moviecenter:latest
     ports:
       - "8000:8000"
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ~/apps/moviecenter/mongo:/data/db
