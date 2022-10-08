@@ -1,6 +1,6 @@
 # GHA workflow for running tests
 
-name: Run Format, Lint and Test
+name: Test
 
 on:
   push:
@@ -21,6 +21,9 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'poetry'
+      - name: Setup docker-compose (only for macos)
+        if: ${{ matrix.os == 'macos-latest' }}
+        uses: docker-practice/actions-setup-docker@v1
       - name: Install dependencies
         run: |
           poetry install
