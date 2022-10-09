@@ -24,4 +24,4 @@ build:
 	docker build -t $(IMAGE):$(VERSION) -t $(IMAGE):latest .
 
 run:
-	docker-compose up -d
+	docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
