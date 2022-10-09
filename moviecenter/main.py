@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, HTTPException
 
 from .movies import (
@@ -11,7 +13,9 @@ from .movies import (
 
 app = FastAPI()
 
-db_client = MovieMongoClient("mongodb://mongodb:27017")
+db_client = MovieMongoClient(
+    f"mongodb://{os.environ['MONGODB_HOSTNAME']}:{os.environ['MONGODB_PORT']}"
+)
 
 
 @app.get("/movies", response_model=list[Movie])
