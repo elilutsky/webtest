@@ -1,8 +1,6 @@
 version: '3.8'
 
 services:
-  webserver:
-    image: moviecenter:latest
   mongodb:
     image: mongo:latest
     hostname: "${MONGODB_HOSTNAME}"
