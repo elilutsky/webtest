@@ -3,6 +3,8 @@ version: '3.8'
 services:
   webserver:
     build: .
+    env_file:
+      - .env.test
   mongodb:
     ports:
       - "${MONGODB_PORT}"
