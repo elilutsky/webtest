@@ -17,4 +17,4 @@ COPY . /app
 
 USER umovie
 
-CMD uvicorn moviecenter.main:app --host 0.0.0.0 --port $WEBSERVER_PORT
+CMD uvicorn moviecenter.main:app --host 0.0.0.0 --port $WEBSERVER_PORT $WEBSERVER_UVICORN_ADDITIONAL_FLAGS
