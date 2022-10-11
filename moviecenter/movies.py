@@ -27,10 +27,7 @@ async def get_all_movies(db_connection: MovieMongoClient) -> list[Movie]:
 
 async def get_movie_by_name(db_connection: MovieMongoClient, name: str) -> Movie | None:
     movie_collection = get_movie_collection(db_connection)
-    if (movie := movie_collection.find_one({"name": name})) is not None:
-        return movie
-    else:
-        return None
+    return movie_collection.find_one({"name": name})
 
 
 async def add_movie(db_connection: MovieMongoClient, movie: Movie) -> None:
