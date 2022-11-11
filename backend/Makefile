@@ -2,7 +2,7 @@
 PYTHON_EXEC := poetry run
 IMAGE := moviecenter
 VERSION := 0.1.0
-ENV := .env.dev # Default env is dev
+ENV := .env.dev
 
 .PHONY: format lint test run
 
