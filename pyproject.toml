@@ -10,6 +10,8 @@ python = "^3.10"
 pydantic = "^1.10.2"
 fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
+pymongo = "^4.2.0"
+python-dotenv = "^0.21.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -19,6 +21,7 @@ mypy = "^0.982"
 isort = "^5.10.1"
 black = "^22.8.0"
 flake8 = "^5.0.4"
+pytest-docker = "^1.0.1"
 
 
 [build-system]

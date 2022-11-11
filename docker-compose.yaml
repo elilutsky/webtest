@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  server:
-    image: moviecenter:latest
-    ports:
-      - "8000:8000"
+  mongodb:
+    image: mongo:latest
+    hostname: "${MONGODB_HOSTNAME}"

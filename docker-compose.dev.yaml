@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  webserver:
+    image: moviecenter:latest
+    ports:
+      - "${WEBSERVER_PORT}:${WEBSERVER_PORT}"
+    env_file:
+      - .env.dev
+    volumes:
+      - ./:/app
+  mongodb:
+    ports:
+      - "${MONGODB_PORT}:${MONGODB_PORT}"
+    volumes:
+      - ~/apps/moviecenter/mongo:/data/db
