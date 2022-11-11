@@ -7,9 +7,7 @@ from .movies import MovieMongoClient
 
 
 def get_mongodb_connection() -> MovieMongoClient:
-    return MovieMongoClient(
-        f"mongodb://{os.environ['MONGODB_HOSTNAME']}:{os.environ['MONGODB_PORT']}"
-    )
+    return MovieMongoClient(f"mongodb://{os.environ['MONGODB_HOSTNAME']}:{os.environ['MONGODB_PORT']}")
 
 
 def create_app() -> FastAPI:

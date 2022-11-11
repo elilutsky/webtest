@@ -29,15 +29,9 @@ def is_responsive(client: MovieMongoClient) -> bool:
 def test_db_connection(  # type: ignore[no-any-unimported]
     docker_ip: str, docker_services: Services
 ) -> MovieMongoClient:
-    port = docker_services.port_for(
-        os.environ["MONGODB_HOSTNAME"], int(os.environ["MONGODB_PORT"])
-    )
-    client: MovieMongoClient = MovieMongoClient(
-        "mongodb://{}:{}".format(docker_ip, port)
-    )
-    docker_services.wait_until_responsive(
-        timeout=30.0, pause=0.1, check=lambda: is_responsive(client)
-    )
+    port = docker_services.port_for(os.environ["MONGODB_HOSTNAME"], int(os.environ["MONGODB_PORT"]))
+    client: MovieMongoClient = MovieMongoClient("mongodb://{}:{}".format(docker_ip, port))
+    docker_services.wait_until_responsive(timeout=30.0, pause=0.1, check=lambda: is_responsive(client))
     return client
 
 
@@ -62,9 +56,7 @@ def test_movies(test_movie_1: Movie, test_movie_2: Movie) -> list[Movie]:
 
 
 @pytest.fixture(autouse=True)
-def populate_db(
-    test_db_connection: MovieMongoClient, test_movies: list[Movie]
-) -> Iterator[None]:
+def populate_db(test_db_connection: MovieMongoClient, test_movies: list[Movie]) -> Iterator[None]:
     movie_collection = get_movie_collection(test_db_connection)
     test_movies_dicts = typing.cast(list[dict[str, typing.Any]], test_movies)
     movie_collection.insert_many(test_movies_dicts)
@@ -73,20 +65,13 @@ def populate_db(
 
 
 @pytest.mark.asyncio
-async def test_get_all_movies(
-    test_db_connection: MovieMongoClient, test_movies: Movie
-) -> None:
+async def test_get_all_movies(test_db_connection: MovieMongoClient, test_movies: Movie) -> None:
     assert await get_all_movies(test_db_connection) == test_movies
 
 
 @pytest.mark.asyncio
-async def test_get_movie_by_name_exists(
-    test_db_connection: MovieMongoClient, test_movie_1: Movie
-) -> None:
-    assert (
-        await get_movie_by_name(test_db_connection, test_movie_1["name"])
-        == test_movie_1
-    )
+async def test_get_movie_by_name_exists(test_db_connection: MovieMongoClient, test_movie_1: Movie) -> None:
+    assert await get_movie_by_name(test_db_connection, test_movie_1["name"]) == test_movie_1
 
 
 @pytest.mark.asyncio
@@ -97,9 +82,7 @@ async def test_get_movie_by_name_not_exists(
 
 
 @pytest.mark.asyncio
-async def test_add_movie(
-    test_db_connection: MovieMongoClient, test_movie_new: Movie
-) -> None:
+async def test_add_movie(test_db_connection: MovieMongoClient, test_movie_new: Movie) -> None:
     await add_movie(test_db_connection, test_movie_new)
 
     m = await get_movie_by_name(test_db_connection, test_movie_new["name"])
@@ -109,9 +92,7 @@ async def test_add_movie(
 
 
 @pytest.mark.asyncio
-async def test_delete_movie(
-    test_db_connection: MovieMongoClient, test_movie_1: Movie
-) -> None:
+async def test_delete_movie(test_db_connection: MovieMongoClient, test_movie_1: Movie) -> None:
     await delete_movie(test_db_connection, test_movie_1["name"])
 
     assert await get_movie_by_name(test_db_connection, test_movie_1["name"]) is None
