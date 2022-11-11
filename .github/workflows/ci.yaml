@@ -1,39 +1,54 @@
 # GHA workflow for running tests
 
-name: Test
+name: Backend CI
 
 on:
   push:
 
 jobs:
-  CI:
+  backend-ci:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
+
     steps:
       - name: Checkout SCM
         uses: actions/checkout@v3
+
       - name: Install poetry
         run: pipx install poetry
+
       - name: Install python
         uses: actions/setup-python@v4
+        id: cp310
         with:
           python-version: '3.10'
           cache: 'poetry'
+
+      # This is due to a bug in setup-python gh action and poetry. The github action runs poetry env use in the
+      # root dir of the CI but fails when missing the pyproject.toml.
+      - name: Use installed python
+        run: |
+          poetry env use '${{ steps.cp310.outputs.python-path }}'
+        working-directory: backend
+
       - name: Setup docker-compose (only for macos)
         if: ${{ matrix.os == 'macos-latest' }}
         uses: docker-practice/actions-setup-docker@v1
+
       - name: Install dependencies
         run: |
           poetry install
-      - name: Run format
-        run: |
-          make format
+        working-directory: backend
+
       - name: Run lint
         run: |
           make lint
+        working-directory: backend
+
       - name: Run test
         run: |
           make test
+        working-directory: backend
           
