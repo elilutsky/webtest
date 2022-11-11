@@ -1,3 +1,5 @@
+from enum import IntEnum
+
 from bson import ObjectId
 from fastapi.encoders import jsonable_encoder
 from pymongo import MongoClient
@@ -5,11 +7,17 @@ from pymongo.collection import Collection
 from typing_extensions import NotRequired, TypedDict
 
 
+class Category(IntEnum):
+    ACTION = 1
+    ROMANTIC = 2
+    COMEDY = 3
+
+
 class Movie(TypedDict):
     _id: NotRequired[ObjectId]
     name: str
     director: str
-    budget: int
+    category: Category
 
 
 MovieMongoClient = MongoClient[Movie]

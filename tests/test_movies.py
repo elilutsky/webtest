@@ -7,6 +7,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 from pytest_docker.plugin import Services
 
 from moviecenter.movies import (
+    Category,
     Movie,
     MovieMongoClient,
     add_movie,
@@ -37,17 +38,17 @@ def test_db_connection(  # type: ignore[no-any-unimported]
 
 @pytest.fixture
 def test_movie_1() -> Movie:
-    return Movie(name="LoTR", director="Steve", budget=100)
+    return Movie(name="LoTR", director="Steve", category=Category.ACTION)
 
 
 @pytest.fixture
 def test_movie_2() -> Movie:
-    return Movie(name="Batman v Superman", director="Zack", budget=1000)
+    return Movie(name="Batman v Superman", director="Zack", category=Category.ROMANTIC)
 
 
 @pytest.fixture
 def test_movie_new() -> Movie:
-    return Movie(name="Justice League", director="Zack", budget=1000)
+    return Movie(name="Justice League", director="Zack", category=Category.COMEDY)
 
 
 @pytest.fixture
