@@ -1,6 +1,10 @@
 version: '3.8'
 
 services:
+  webserver:
+    build: .
+    env_file:
+      - .env.test
   mongodb:
     ports:
-      - "27017"
+      - "${MONGODB_PORT}"

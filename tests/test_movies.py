@@ -1,3 +1,4 @@
+import os
 import typing
 from typing import Iterator
 
@@ -28,7 +29,9 @@ def is_responsive(client: MovieMongoClient) -> bool:
 def test_db_connection(  # type: ignore[no-any-unimported]
     docker_ip: str, docker_services: Services
 ) -> MovieMongoClient:
-    port = docker_services.port_for("mongodb", 27017)
+    port = docker_services.port_for(
+        os.environ["MONGODB_HOSTNAME"], int(os.environ["MONGODB_PORT"])
+    )
     client: MovieMongoClient = MovieMongoClient(
         "mongodb://{}:{}".format(docker_ip, port)
     )
